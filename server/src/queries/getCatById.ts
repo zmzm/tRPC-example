@@ -3,14 +3,15 @@ import z from 'zod';
 import { Cat, CatObject } from '../types/cat';
 
 export const getCatById = {
-  input: z.number(),
+  input: z.string(),
   output: CatObject,
-  async resolve(req: any) {
-    const foundCat = cats.find((cat: Cat) => cat.id === req.input);
+  async resolve({ input, ctx: { database } }: any) {
+    const foundCat: Cat = database.findById(input);
+
     if (!foundCat) {
       throw new trpc.TRPCError({
         code: 'BAD_REQUEST',
-        message: `could not find cat with id ${req.input}`,
+        message: `Could not find cat with id ${input}`,
       });
     }
     return foundCat;

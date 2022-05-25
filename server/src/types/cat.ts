@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const CatObject = z.object({
-  id: z.number(),
+  id: z.string(),
   name: z.string(),
 });
 
