@@ -12,4 +12,5 @@ const trpcRouter = trpc
   .mutation('create', createCat)
   .mutation('delete', deleteCat);
 
+export type TRPCRouter = typeof trpcRouter;
 export default trpcRouter;
